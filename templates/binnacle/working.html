@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+{% block title %} Home {% endblock title %}
+{% block content %}
+<div class="container-fluid">
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-lg-4">
+            <input type="text" name="name" id="id_name" required class="form-control" placeholder="Ingrese nombre del {{ title }}"/>
+        </div>
+        <div class="col-lg-3">
+            <select name="area" class="form-control" id="id_area">
+                {% for items in area %}
+                    <option value="{{ items.id }}">{{ items }}</option>
+                {% endfor %}
+            </select>
+            <div align="right">
+                <a href="{% url 'binnacle:create_value' 'area' 'create' '0' %}" >Añadir area</a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <select name="workstation" class="form-control" id="id_workstation">
+                <option >Puesto</option>
+                {% for items in workstation %}
+                    <option value="{{ items.id }}">{{ items }}</option>
+                {% endfor %}
+            </select>
+            <div align="right">
+                <a href="{% url 'binnacle:create_value' 'workstation' 'create' '0' %}" >Añadir puesto</a>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <button class="btn btn-primary btn-round" type='submit'>Agregar</button>
+        </div>
+    </div>
+</form>
+
+    <div class="row">
+            <div class="col-lg-12 col-md-12">
+                 <div class="card">
+                    <div class="card-header hidden-xs" data-background-color="red">
+                        <div class="row " align="center" style="font-size: x-large;">
+                            <a href=""> <div class="col-md-5 col-sm-2 fix-tabla">Nombre</div></a>
+                            <a href=""> <div class="col-md-3 col-sm-2 fix-tabla">Puesto de trabajo</div></a>
+                            <a href=""> <div class="col-md-3 col-sm-2 fix-tabla">Area</div></a>
+                            <a href=""><div class="col-md-1 col-sm-2"></div>
+                            </a>
+                        </div>
+                    </div>
+                     <div class="card-content">
+                     </div>
+                      {% if model %}
+                          {% for datas in model %}
+                                <div class="row card-footer hidden-md" align="center">
+                                    <div class="col-md-5 col-sm-2 " align="center" style="padding-left: 6%; padding-right: 20px">{{ datas.name }}</div>
+                                    <div class="col-md-3 col-sm-2 " align="center" style="padding-left: 6%; padding-right: 20px">{{ datas.workstation }}</div>
+                                    <div class="col-md-3 col-sm-2 " align="center" style="padding-left: 6%; padding-right: 20px">{{ datas.area }}</div>
+                                    <div class="col-md-1 col-sm-2">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="material-icons" style="color: #f44336">arrow_drop_down_circle</i>
+                                        <div class="ripple-container"></div></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="">Editar</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                             {% endfor %}
+                         {% else %}
+                          <div class="row">
+                              <div class="col-lg-12" align="center">
+                                  <h3>Sin datos</h3>
+                              </div>
+                          </div>
+                         {% endif %}
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock content %}

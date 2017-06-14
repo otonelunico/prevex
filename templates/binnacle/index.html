@@ -1,0 +1,128 @@
+{% extends 'base/base.html' %}
+{% block title %} Home {% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">mood_bad</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="title"> <small> Actualmente hay </small> </h4>
+                    <h3 class="title">{{ accidentados }}<small> accidentes regist.</small></h3>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'binnacle:all_accident' %}"><div class="stats" style="font-size: large">
+                        <i class="material-icons" style="padding-bottom: 10px">list</i> Ver todos el registro
+                  </div></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">hotel</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="title"> <small> Trabajadores hay </small> </h4>
+                    <h3 class="title">{{ repose }}<small> en descanso </small></h3>
+                </div>
+                <div class="card-footer">
+                    <a href="">
+                        <div class="stats" style="font-size: large">
+                        <i class="material-icons" style="padding-bottom: 10px">add_circle</i> Añadir un registro de accidente
+                  </div></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">mood_bad</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="title"> <small> Ver el registro </small> </h4>
+                    <h3 class="title"><small>completo</small></h3>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="status" data-toggle="dropdown" aria-expanded="false">
+                        <div class="stats" style="font-size: large">
+                            <i class="material-icons" style="padding-bottom: 10px">arrow_drop_down_circle</i> Mas opciones
+                            <div class="ripple-container"></div>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" data-background-color="red">
+                        <li><a href="{% url 'binnacle:working' '0' %}">Listado de trabajadores</a></li>
+                        <li><a href="{%  url 'binnacle:create_value' 'area' 'create' '0' %}">Listado de areas</a></li>
+                        <li><a href="{%  url 'binnacle:create_value' 'workstation' 'create' '0' %}">Listado de puestos de trabajo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-lg-12 col-md-12" align="center">
+                <h3>Ultimos 5 registros</h3>
+            </div>
+    </div>
+
+    <div class="row">
+            <div class="col-lg-12 col-md-12">
+                 <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <div class="row " align="center" style="font-size: x-large;">
+                            <a href=""> <div class="col-md-3 col-sm-2 fix-tabla">Fecha</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Trabajador</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Tipo accid.</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Area</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Puesto</div></a>
+                            <a href="{% url 'binnacle:accident' 'create' '0' %}">
+                                <div class="col-md-1 col-sm-1">
+                                    <i class="material-icons" style="font-size: xx-large" >add_circle</i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                     <div class="card-content">
+                     </div>
+                      {% if model %}
+                          {% for datas in model %}
+                                <div class="row card-footer hidden-md" align="center">
+                                    <a href="{% url 'binnacle:accident' 'view' datas.id %}"><div class="col-md-3 col-sm-2 " align="center" style="">{{ datas.date }} - {{ datas.hour }}</div>
+                                    <div class="col-md-2 col-sm-2 " align="center">{{ datas.working.name }}</div>
+                                    <div class="col-md-2 col-sm-2 " >{{ datas.type }}</div>
+                                    <div class="col-md-2 col-sm-2 " >{{ datas.area }}</div>
+                                    <div class="col-md-2 col-sm-2 " >{{ datas.workstation}}</div></a>
+                                    <div class="col-md-1 col-sm-1">
+                                        <a href="{% url 'binnacle:accident' 'edit' datas.id %}" rel="tooltip" data-original-title="Editar" title=""><i class="material-icons">mode_edit</i></a>
+                                        <a href="#" rel="tooltip" data-original-title="Añadir reposo?" title="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="material-icons">hotel</i>
+                                            <div class="ripple-container">
+                                            </div>
+                                        </a>
+                                        <div class="ripple-container"></div>
+                                        <ul class="dropdown-menu" data-background-color="red">
+                                            <li><p style="text-align: center;font-size: large">Reposo</p></li>
+                                            <li><a href="">Seguro?</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                             {% endfor %}
+                         {% else %}
+                          <div class="row">
+                              <div class="col-lg-12" align="center">
+                                  <h3>Sin datos</h3>
+                              </div>
+                          </div>
+                         {% endif %}
+                </div>
+            </div>
+        </div>
+</div>
+
+
+{% endblock content %}
+{% block js %}
+
+{% endblock js %}

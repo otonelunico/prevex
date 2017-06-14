@@ -1,0 +1,85 @@
+{% extends 'base/base.html' %}
+{% block title %} {{ title }}{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <h3>
+                    {% if edit %}
+                        Editar el {{ title }} seleccionado
+                    {% else %}
+                        Crear un nuevo {{ title }}</h3>
+                    {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <input type="text" name="title" id="id_title" value="{{ edit.title }}" required class="form-control" placeholder="Ingrese nombre del {{ title }}"/>
+            </div>
+            <div class="col-lg-7">
+                <input type="text" name="detail" id="id_detail" value="{{ edit.detail }}" required class="form-control" placeholder="Ingrese detalle del {{ title }}"/>
+            </div>
+            <div class="col-lg-2">
+                <button class="btn btn-primary btn-round btn-red" type='submit'>
+                    {% if edit %}
+                        Editar
+                    {% else %}
+                        Agregar
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-lg-12" align="center">
+            <h3>Listado de los {{ title }}</h3>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-lg-12 col-md-12">
+                 <div class="card">
+                    <div class="card-header hidden-xs" data-background-color="red">
+                        <div class="row " align="center" style="font-size: x-large;">
+                            <a href=""> <div class="col-md-4 col-sm-2 fix-tabla">Titulo</div></a>
+                            <a href=""> <div class="col-md-6 col-sm-2 fix-tabla">Descripcion</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2"></div>
+                            </a>
+                        </div>
+                    </div>
+                     <div class="card-content">
+                     </div>
+                      {% if model %}
+                          {% for datas in model %}
+                                <div class="row card-footer hidden-md" align="center">
+                                    <div class="col-md-4 col-sm-2 " align="center" style="padding-left: 6%; padding-right: 20px">{{ datas.title }}</div>
+                                    <div class="col-md-6 col-sm-2 " align="center" style="padding-left: 6%; padding-right: 20px">{{ datas.detail }}</div>
+                                    <div class="col-md-2 col-sm-1" >
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="material-icons" style="color: #f44336">arrow_drop_down_circle</i>
+                                        <div class="ripple-container"></div></a>
+                                        <ul class="dropdown-menu" data-background-color="red">
+                                            <li><a href="{% url 'binnacle:create_value' value 'edit' datas.id %}">Editar</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                             {% endfor %}
+                         {% else %}
+                          <div class="row">
+                              <div class="col-lg-12" align="center">
+                                  <h3>Sin datos</h3>
+                              </div>
+                          </div>
+                         {% endif %}
+                </div>
+            </div>
+        </div>
+</div>
+
+
+{% endblock content %}
+{% block js %}
+
+{% endblock js %}

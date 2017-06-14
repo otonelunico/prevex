@@ -1,0 +1,101 @@
+{% extends 'base/base.html' %}
+{% block title %} {{ title }}{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <h3>
+                    {% if edit %}
+                        Editar el {{ title }} seleccionado
+                    {% else %}
+                        Crear un nuevo {{ title }}</h3>
+                    {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10">
+                <input type="hidden"  name="type" id="id_type" value="{{ type }}" required class="form-control" placeholder="Ingrese nombre del {{ title }}"/>
+                <input type="text" name="item" id="id_item" value="{{ edit.item }}" required class="form-control" placeholder="Ingrese nombre del {{ title }}"/>
+            </div>
+            <div class="col-lg-2">
+                <button class="btn btn-primary btn-round btn-blue" type='submit'>
+                    {% if edit %}
+                        Editar
+                    {% else %}
+                        Agregar
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-lg-12" align="center">
+            <h3>Listado de los {{ title }}</h3>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-lg-12 col-md-12">
+                 <div class="card">
+                    <div class="card-header hidden-xs" data-background-color="blue">
+                        <div class="row " align="center" style="font-size: x-large;">
+                            <a href=""> <div class="col-md-10 col-sm-2 fix-tabla">Titulo</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2"></div>
+                            </a>
+                        </div>
+                    </div>
+                     <div class="card-content">
+                     </div>
+                      {% if model %}
+                          {% for datas in model %}
+                                <div class="row card-footer hidden-md" align="center">
+                                    <div class="col-md-10 col-sm-2 " align="left" style="padding-left: 6%; padding-right: 20px">{{ datas.item}}</div>
+                                    <div class="col-md-2 col-sm-1" >
+                                        <a href="{% url 'screen:prevent' 'edit' type datas.id %}" >
+                                            <i class="material-icons color-blue">edit</i>
+                                        <div class="ripple-container color-blue"></div></a>
+                                        <a href="{% url 'screen:prevent' 'delete' type datas.id %}" >
+                                            <i class="material-icons" style="color: #00acc1">clear</i>
+                                        <div class="ripple-container"></div></a>
+                                    </div>
+                                </div>
+                             {% endfor %}
+                         {% else %}
+                          <div class="row">
+                              <div class="col-lg-12" align="center">
+                                  <h3>Sin datos</h3>
+                              </div>
+                          </div>
+                         {% endif %}
+
+                <div class="row card-footer">
+                    <a href="{{ video }}" >
+                        <div class="col-lg-8" style="padding-top: 20px">
+                            <i class="material-icons" >movie</i> URL: {{ video }}
+                        </div>
+                    </a>
+                    {% if video %}
+                    <div class="col-lg-2">
+                        <a href="{% url 'screen:video' 'edit' type %}" class="btn btn-primary btn-round btn-blue" style="padding-top: 10px; padding-bottom: 10px;" >Editar</a>
+                    </div>
+                    <div class="col-lg-2">
+                        <a href="{% url 'screen:video' 'delete' type %}" class="btn btn-primary btn-round btn-blue" style="padding-top: 10px; padding-bottom: 10px;" >Eliminar</a>
+                    </div>
+                    {% else %}
+                    <div class="col-lg-4" align="center">
+                        <a href="{% url 'screen:video' 'create' type %}" class="btn btn-primary btn-round btn-blue" style="padding-top: 10px; padding-bottom: 10px;" >Agregar</a>
+                    </div>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+{% endblock content %}
+{% block js %}
+
+{% endblock js %}

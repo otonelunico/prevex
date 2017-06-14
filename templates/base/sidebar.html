@@ -1,0 +1,27 @@
+
+ <ul class="nav">
+    <li class="{{ home }}">
+        <a href="{% url 'home:index' %}">
+            <i class="material-icons">home</i>
+            <p>Inicio</p>
+        </a>
+    </li>
+    <li class="{{ inventory }}">
+        <a href="{% url 'inventory:index' %}">
+            <i class="material-icons">format_list_numbered</i>
+            <p>Inventario</p>
+        </a>
+    </li>
+    <li class="{{ binnacle }}">
+        <a href="{% url 'binnacle:index' %}">
+            <i class="material-icons">import_contacts</i>
+            <p>Bitacora</p>
+        </a>
+    </li>
+    <li class="{{ screen }}">
+        <a href="{% url 'screen:settings' %}">
+            <i class="material-icons">desktop_windows</i>
+            <p>Pantalla</p>
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% block title %} {{ title }}{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <h3>URL para video</h3>
+            </div>
+        </div>
+    <input type="hidden"  name="type" id="id_type" value="{{ type }}" required class="form-control" />
+
+        <div class="row">
+            <div class="col-lg-10">
+                <input type="text" name="url" id="id_url" value="{{ edit.url }}" required class="form-control" placeholder="Ingrese URL para video de {{ title }}"/>
+            </div>
+            <div class="col-lg-2">
+                <button class="btn btn-primary btn-round btn-blue" type='submit'>
+                    {% if edit %}
+                        Editar
+                    {% else %}
+                        Agregar
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}
+{% block js %}
+
+{% endblock js %}

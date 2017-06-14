@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% block title %} Home {% endblock title %}
+{% block content %}
+<div class="container-fluid">
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-lg-10">
+            <input type="text" name="title" id="id_title" required class="form-control" placeholder="Ingrese nombre del {{ title }}"/>
+        </div>
+        <div class="col-lg-2">
+            <button class="btn btn-primary btn-round" type='submit'>Agregar</button>
+        </div>
+    </div>
+</form>
+{% if data %}
+    {% for datas in data %}
+    {{ datas.title }} <br>
+    {% endfor %}
+{% endif %}
+</div>
+
+
+{% endblock content %}
+{% block js %}
+
+{% endblock js %}

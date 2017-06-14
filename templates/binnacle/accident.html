@@ -1,0 +1,193 @@
+{% extends 'base/base.html' %}
+{% block title %} Home {% endblock title %}
+{% block content %}
+<div class="container-fluid">
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-lg-12" align="center">
+            <h3>Datos del trabajador accidentado</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <select name="working" {{ view }} id="id_working" class="form-control">
+            {% if edit %}
+                <option value="{{ edit.working.id }}">{{ edit.working }}</option>
+            {% endif %}
+                {% for items in working %}
+                    <option value="{{ items.id }}">{{ items }}</option>
+                {% endfor %}
+            </select>
+                <div align="right">
+                    <a href="{% url 'binnacle:working' '0'%}" >Añadir trabajador</a>
+                </div>
+
+        </div>
+
+        <div class="col-lg-4"style="margin-left: 0px">
+            <div class="row" style="margin-left: 0px">
+                <div class="col-xs-5" style="margin-left: 0px">
+                    {% if edad %}
+                        <input type="number" {{ view }} name="year" id="id_year" class="form-control" value="{{ edit.year }}" required />
+                    {% else %}
+                        <input type="number" {{ view }} name="year" id="id_year" class="form-control" value="18" required />
+                    {% endif %}
+                 </div>
+                 <div class="col-xs-3" style="margin-left: 0px">
+                        <input type="text" {{ view }} class="form-control" value="años" disabled/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4" style="margin-left: 0px">
+            <div class="row" style="margin-left: 0px">
+                 <div class="col-xs-3" style="margin-left: 0px">
+                        <input type="text" {{ view }} class="form-control" value="Reposo" disabled/>
+                </div>
+                <div class="col-xs-4" style="margin-left: 0px">
+                    {% if edit %}
+                        <input type="number" {{ view }} name="repose" id="id_repose" class="form-control" value="{{ edit.repose }}" required />
+                    {% else %}
+                        <input type="number" {{ view }} name="repose" id="id_repose" class="form-control" value="0" required />
+                    {% endif %}
+                 </div>
+                 <div class="col-xs-3" style="margin-left: 0px">
+                        <input type="text" {{ view }} class="form-control" value="dia(s)" disabled/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12" align="center">
+            <h3>Datos del Accidente</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <select name="type" {{ view }} id="id_type" class="form-control">
+            {% if edit %}
+                <option value="{{ edit.type.id }}">{{ edit.type }}</option>
+            {% endif %}
+                {% for items in type %}
+                    <option value="{{ items.id }}">{{ items }}</option>
+                {% endfor %}
+            </select>
+                <div align="right">
+                    <a href="{% url 'binnacle:create_value' 'type' 'create' '0' %}" >Añadir tipo de  accidente</a>
+                </div>
+        </div>
+        <div class="col-lg-2">
+            {% if edit %}
+            <input type="text" {{ view }} name="date" value="{{ edit.date.day }}/{{ edit.date.month }}/{{ edit.date.year }}" id="id_date" class="form-control" required />
+            {% else %}
+            <input type="date" {{ view }} name="date" id="id_date" class="form-control" required />
+            {% endif %}
+        </div>
+        <div class="col-lg-2">
+            <input type="time" {{ view }} name="hour" value="{{ edit.hour }}" id="id_hour" class="form-control" required />
+        </div>
+        <div class="col-lg-2">
+            <select name="workstation" {{ view }} id="id_workstation" class="form-control">
+                {% if edit %}
+                    <option value="{{ edit.workstation.id }}">{{ edit.workstation }}</option>
+                {% endif %}
+                {% for items in workstation %}
+                    <option value="{{ items.id }}">{{ items }}</option>
+                {% endfor %}
+            </select>
+                <div align="right">
+                    <a href="{% url 'binnacle:create_value' 'workstation' 'create' '0' %}" >Añadir puesto</a>
+                </div>
+
+        </div>
+        <div class="col-lg-2">
+            <select name="area" {{ view }} id="id_area" class="form-control">
+                {% if edit %}
+                    <option value="{{ edit.area.id }}">{{ edit.area }}</option>
+                {% endif %}
+                {% for items in area %}
+                    <option value="{{ items.id }}">{{ items }}</option>
+                {% endfor %}
+            </select>
+                <div align="right">
+                    <a href="{% url 'binnacle:create_value' 'area' 'create' '0' %}" >Añadir area</a>
+                </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <textarea name="description" {{ view }} required rows="3" id="id_description" class="form-control" placeholder="Detalles del accidente.">{{ edit.description }}</textarea>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            {% if edit %}
+                <input type="text" {{ view }} name="observation" value="{{ edit.observation }}" required id="id_observation" class="form-control" placeholder="Observacion"/>
+            {% else %}
+                <input type="text" {{ view }} name="observation" value="Sin Observaciones" required id="id_observation" class="form-control" placeholder="Observacion"/>
+            {% endif %}
+        </div>
+        {% if view %}
+            <div class="col-lg-4" align="center">
+                <a href="javascript:history.back(-1);" class="btn btn-primary btn-round" type='reset'>Volver</a>
+            </div>
+        {% else %}
+        <div class="col-lg-2">
+            <button class="btn btn-primary btn-round" type='reset'>Limpiar</button>
+        </div>
+        <div class="col-lg-2">
+            <button class="btn btn-primary btn-round" type='submit'>Agregar</button>
+        </div>
+        {% endif %}
+    </div>
+
+</form>
+
+  <!--  <div class="row">
+            <div class="col-lg-12 col-md-12">
+                 <div class="card">
+                    <div class="card-header hidden-xs" data-background-color="red">
+                        <div class="row " align="center" style="font-size: x-large;">
+                            <a href=""> <div class="col-md-2 col-sm-2 fix-tabla" align="center">#</div></a>
+                            <a href=""> <div class="col-md-4 col-sm-2 fix-tabla">Nombre</div></a>
+                            <a href=""> <div class="col-md-2 col-sm-2 fix-tabla">Puesto de trabajo</div></a>
+                            <a href=""> <div class="col-md-2 col-sm-2 fix-tabla">Area</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2"></div>
+                            </a>
+                        </div>
+                    </div>
+                     <div class="card-content">
+                     </div>
+                      {% if model %}
+                          {% for datas in model %}
+                                <div class="row card-footer hidden-md" align="center">
+                                    <div class="col-md-2 col-sm-2 " align="center" style="padding-left: 6%; padding-right: 20px">{{ datas.working }}</div>
+                                    <div class="col-md-2 col-sm-2 " align="center" style="padding-left: 6%; padding-right: 20px">{{ datas.date }}-{{ datas.hour }}</div>
+                                    <div class="col-md-2 col-sm-2 " align="center" style="padding-left: 6%; padding-right: 20px">{{ datas.type }}</div>
+                                    <div class="col-md-4 col-sm-2 " align="center" style="padding-left: 6%; padding-right: 20px">{{ datas.description }}</div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="material-icons">keyboard_arrow_down</i> Acciones
+                                        <div class="ripple-container"></div></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="">Editar</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                             {% endfor %}
+                         {% else %}
+                          <div class="row">
+                              <div class="col-lg-12" align="center">
+                                  <h3>Sin datos</h3>
+                              </div>
+                          </div>
+                         {% endif %}
+                </div>
+            </div>
+        </div>
+</div> -->
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %}
+{% block meta %}
+
+    <meta http-equiv="refresh" content="1800" >
+{% endblock meta %}
+{% block screen %}
+
+    <div class="row" style="padding: 1%">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" data-background-color="blue" align="center">
+                    <h2 class="title">Es momento de prevenir {{ type }}</h2>
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div style="height: 400px">
+                                {% if video %}
+                                <iframe width="100%" height="100%" src="{{ video.url }}?listType=playlist&list=PLAYLIST_ID&version=3&loop=1&autoplay=1&rel=0&showinfo=0&controls=0&autohide=1  " frameborder="20" allowfullscreen></iframe>
+                                {% else %}
+                                <div style="height: 400px;background-image: url('http://marketingland.com/wp-content/ml-loads/2015/01/video-cameras-lenses-ss-1920-800x450.jpg')">
+
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card-header" style="margin-top: 20px; margin-bottom: 20px" data-background-color="purple">
+                                <h3 class="title">Como prevenir?</h3>
+                            </div>
+                             <table class="table table-hover">
+                             {% if Prevent %}
+                                 {% for foo in Prevent %}
+                                 <div class="row">
+                                    <div class="col-lg-1">
+                                        <h4><i class="material-icons">chevron_right</i></h4>
+                                    </div>
+                                    <div class="col-lg-11">
+                                        <h4>{{ foo.item }}</h4>
+                                    </div>
+                                </div>
+                                 {% endfor %}
+                             {% else %}
+
+                                 <div class="row">
+                                    <div class="col-lg-1">
+                                        <h4><i class="material-icons">chevron_right</i></h4>
+                                    </div>
+                                    <div class="col-lg-11">
+                                        <h4>Sin datos</h4>
+                                    </div>
+                                </div>
+                             {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock screen %}
+{% block js %}
+{% endblock js %}

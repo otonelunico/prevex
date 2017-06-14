@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+{% block title %} Home {% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+            <div class="col-lg-12 col-md-12" align="center">
+                <h3>Registro de todos los accidentes</h3>
+            </div>
+    </div>
+
+    <div class="row">
+            <div class="col-lg-12 col-md-12">
+                 <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <div class="row " align="center" style="font-size: x-large;">
+                            <a href=""> <div class="col-md-3 col-sm-2 fix-tabla">Fecha</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Trabajador</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Tipo accid.</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Area</div></a>
+                            <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Puesto</div></a>
+                            <a href="{% url 'binnacle:accident' 'create' '0' %}">
+                                <div class="col-md-1 col-sm-1">
+                                    <i class="material-icons" style="font-size: xx-large" >add_circle</i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                     <div class="card-content">
+                     </div>
+                      {% if model %}
+                          {% for datas in model %}
+                                <div class="row card-footer hidden-md" align="center">
+                                    <a href="{% url 'binnacle:accident' 'view' datas.id %}"><div class="col-md-3 col-sm-2 " align="center" style="">{{ datas.date }} - {{ datas.hour }}</div>
+                                    <div class="col-md-2 col-sm-2 " align="center">{{ datas.working.name }}</div>
+                                    <div class="col-md-2 col-sm-2 " >{{ datas.type }}</div>
+                                    <div class="col-md-2 col-sm-2 " >{{ datas.area }}</div>
+                                    <div class="col-md-2 col-sm-2 " >{{ datas.workstation}}</div></a>
+                                    <div class="col-md-1 col-sm-1">
+                                        <a href="{% url 'binnacle:accident' 'edit' datas.id %}" rel="tooltip" data-original-title="Editar" title=""><i class="material-icons">mode_edit</i></a>
+                                        <a href="#" rel="tooltip" data-original-title="Añadir reposo?" title="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="material-icons">hotel</i>
+                                            <div class="ripple-container">
+                                            </div>
+                                        </a>
+                                        <div class="ripple-container"></div>
+                                        <ul class="dropdown-menu" data-background-color="red">
+                                            <li><p style="text-align: center;font-size: large">Reposo</p></li>
+                                            <li><a href="">Seguro?</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                             {% endfor %}
+                         {% else %}
+                          <div class="row">
+                              <div class="col-lg-12" align="center">
+                                  <h3>Sin datos</h3>
+                              </div>
+                          </div>
+                         {% endif %}
+                </div>
+            </div>
+        </div>
+</div>
+
+
+{% endblock content %}
+{% block js %}
+
+{% endblock js %}

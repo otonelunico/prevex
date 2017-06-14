@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+{% block title %} Home {% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2" align="center">
+            <h5>Item : </h5>
+        </div>
+        <div class="col-lg-10" align="left">
+            <h5>{{ obj.code }} - {{ obj.description }} - {{ obj.group }}</h5>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+             <div class="card">
+                <div class="card-header hidden-xs" data-background-color="purple">
+                    <div class="row " align="center" style="font-size: x-large;">
+                        <a href=""><div class="col-md-3 col-sm-2">Fecha y hora</div></a>
+                        <a href=""><div class="col-md-3 col-sm-2">Ubicacion</div></a>
+                        <a href=""><div class="col-md-3 col-sm-2">Estado</div></a>
+                        <a href=""><div class="col-md-3 col-sm-2">Cantidad</div></a>
+                    </div>
+                </div>
+                 <div class="card-content">
+                 </div>
+                  {% if model %}
+                    {% for datas in model %}
+                        {% if datas.stock < 0 %}
+                        <div class="row card-footer hidden-md" align="center" style="color: darkred">
+                            <div class="col-md-3 col-sm-2 ">{{ datas.created_at }}</div>
+                            <div class="col-md-3 col-sm-2 " >{{ datas.location }}</div>
+                            <div class="col-md-3 col-sm-2 " >{{ datas.state }}</div>
+                            <div class="col-md-3 col-sm-2 " >{{ datas.stock }}</div>
+                        </div>
+                        {% else %}
+                        <div class="row card-footer hidden-md" align="center">
+                            <div class="col-md-3 col-sm-2 ">{{ datas.created_at }}</div>
+                            <div class="col-md-3 col-sm-2 " >{{ datas.location }}</div>
+                            <div class="col-md-3 col-sm-2 " >{{ datas.state }}</div>
+                            <div class="col-md-3 col-sm-2 " >{{ datas.stock }}</div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    <div class="row">
+                    <div class="col-lg-12" align="center">
+                    <h3> Sin movimientos </h3>
+                    </div>
+                    </div>
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+{% block js %}
+
+{% endblock js %}
