@@ -70,6 +70,7 @@ def Create_value(request, value):
         if form.is_valid():
             form.save()
             return redirect('inventory:maintainer_item', 'create', '0')
+
     return render(request, 'inventory/create_value.html', data[value])
 
 
@@ -88,7 +89,10 @@ def Maintainer_item(request, value, code):
             form = ItemForm(request.POST)
             if form.is_valid():
                 form.save()
-            return redirect('inventory:maintainer_item', 'create', '0')
+                return redirect('inventory:maintainer_item', 'create', '0')
+            else:
+                print(form.is_valid())
+                print(form.errors)
     elif value == 'edit':
         code_=str(code)
         item = Item.objects.get(code=code_)
