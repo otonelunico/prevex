@@ -116,7 +116,7 @@ def Create_accident(request,funct, value):
             form = AccidentForm(request.POST)
             if form.is_valid():
                 form.save()
-                Send()
+                Send(str(Accident.objects.last().id))
                 return redirect('binnacle:index')
             else:
                 print(form.is_valid())
@@ -152,7 +152,7 @@ def Notify(subject, message,receiver):
                message,
               "support@prevex.herokuapp.com",
               [receiver],
-              fail_silently=False)
+                fail_silently = False)
 def Send(id):
     print('id del guardado es'+id)
     dominio = 'http://0.0.0.0:8888/'
