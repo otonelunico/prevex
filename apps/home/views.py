@@ -6,3 +6,6 @@ def index(request):
     data = {}
     data['home'] = 'active'
     return render(request, 'home/index.html', data)
+
+def Verify(request):
+    return render(request, 'home/verifyforzoho.html')
