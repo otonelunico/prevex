@@ -25,7 +25,7 @@ SECRET_KEY = '&@i_c!+z2q8jq0%*8^f@(5an0-rlpe(mupe%!g4k8%b!&_^n&a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['oton.ddns.net', 'localhost', '127.0.0.1', '0.0.0.0','*']
 
 
 # Application definition
@@ -45,7 +45,9 @@ INSTALLED_APPS += [
     'apps.binnacle',
     'apps.screen',
 ]
-
+INSTALLED_APPS += [
+    'django_extensions',
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -139,4 +141,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-ALLOWED_HOSTS = ['oton.ddns.net', 'localhost', '127.0.0.1', '0.0.0.0','*']
+# EMAIL SETTINGS
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'support@prevex.herokuapp.com'
+EMAIL_HOST_PASSWORD = 'elunico1'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
