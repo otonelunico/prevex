@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from apps.binnacle.models import Area, Accident, Workstation, Working, Type_Accident
 from apps.binnacle.forms import WorkingForm, WorkstationForm,  AreaForm, AccidentForm, Type_AccidentForm
 from django.db.models import Count
+import os
 
 # Create your views here.
 
@@ -109,13 +110,13 @@ def Create_accident(request,funct, value):
     data['workstation'] = Workstation.objects.all().order_by('title')
     data['working'] = Working.objects.all().order_by('name')
     data['form'] = AccidentForm()
-
     data['title'] = 'accidente'
     if funct == 'create':
         if request.method == 'POST':
             form = AccidentForm(request.POST)
             if form.is_valid():
                 form.save()
+                Send(str(Accident.objects.last().id))
                 return redirect('binnacle:index')
             else:
                 print(form.is_valid())
@@ -142,3 +143,23 @@ def Create_accident(request,funct, value):
                 print(form.is_valid())
                 print(form.errors)
     return render(request, 'binnacle/accident.html', data)
+
+
+from django.core.mail import send_mail
+
+def Notify(subject, message,receiver):
+    send_mail(subject,
+               message,
+              "support@prevex.herokuapp.com",
+              [receiver])
+def Send(id):
+    print('id del guardado es'+id)
+    dominio = 'http://0.0.0.0:8888/'
+    if os.getenv('SETTINGS_MODE') in ['PROD']:
+        dominio = 'https://prevex.herokuapp.com/'
+    email = {'ocubillosj@gmail.com', 'ocubillos.corp@gmail.com'}
+    for llo in email:
+        print(llo)
+        Notify('Se a registrado un nuevo accidente',
+               'Se a ingresado un nuevo accidente, haga clic aqui para ver detalles.'+dominio+'binnacle/accident/view/'+id,
+               llo)
