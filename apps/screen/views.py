@@ -12,20 +12,20 @@ def index(request):
     data['screencast'] = 'active'
     current = Current()
     id_=current['id']
-    print(id_)
+
     if id_ == 0:
         current = Current_day()
         id_=current['id']
     if id_ == 0:
         current = Current_mes()
         id_=current['id']
-    print(id_)
+
     data['type']= Type_Accident.objects.get(id=id_)
     if Video.objects.filter(type=id_):
         data['video']= Video.objects.get(type=id_)
 
-    data['Prevent']= Prevent.objects.filter(type=id_)
-    print(data['type'])
+    data['prevent']= Prevent.objects.filter(type=id_)
+
     return render(request, 'screen/index.html', data)
 
 def dia(value):
@@ -50,6 +50,7 @@ def Current():
         for llo in model:
             day = llo.date.strftime("%w")
             hour = llo.hour.strftime("%H")
+            print(day+'-'+hour)
             if now_day == day and now_hour == hour:
                 cont = cont+1
             if cont > filter_one['total']:
@@ -57,7 +58,10 @@ def Current():
                 filter_one['title']= llo.type.title
                 filter_one['id']= llo.type.id
     print(filter_one)
+    print('...')
     return filter_one
+
+
 def Current_day():
     filter_one = {}
     now_day = time.strftime("%w")

@@ -89,6 +89,7 @@ def Maintainer_item(request, value, code):
             form = ItemForm(request.POST)
             if form.is_valid():
                 form.save()
+
                 return redirect('inventory:maintainer_item', 'create', '0')
             else:
                 print(form.is_valid())
