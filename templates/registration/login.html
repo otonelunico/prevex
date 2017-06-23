@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<head>
+<title> Bienvenidon a PREVEX</title>
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/material-dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/material-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"></head>
+<body>
+<div class="row container-fluid" style="padding-top: 6%">
+    <div class="col-lg-4 hidden-md hidden-xs">
+
+    </div>
+    <div class="col-lg-4 col-md-12 col-xs-12" align="center">
+
+    <div class="card">
+        <div class="card-header" data-background-color="orange" align="center">
+            <h2 class="title">Bienvenido a PREVEX</h2>
+            <h3 class="category">Por favor iniciatr seccion.</h3>
+        </div>
+        <div class="card-content" align="center">
+            <form method="post"	 >
+            {% csrf_token %}
+
+                <div class="login-form">
+                    <div class="control-group" style="margin-top: 20px">
+                    <input type="text" class="form-control"  name="username" placeholder="Nombre de usuario" id="login-name">
+
+                    </div>
+
+                    <div class="control-group" style="margin-top: 20px">
+                    <input type="password" class="form-control" name="password" placeholder="Contraseña" id="login-pass">
+
+                    </div>
+
+
+                    <input type="submit" class="btn btn-primary" value="Ingresar" style="margin-top: 40px"><br>
+                    <a href="{% url 'password_reset' %}" class="login-link" >Olvide mi contraseña</a><br>
+                            {% if form.errors %}
+                    <p class="error">Error, Usuario y/o contraseña invalido.</p>
+                {% endif %}
+                </div>
+            </form>
+        </div>
+
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <nav class="pull-right">
+                Powered by
+                <a href="https://vicius2.herokuapp.com/"  target="_blank">
+                    <img src="https://vicius2.herokuapp.com/static/img/vicius-black.png" alt="" title="" style="height: 20px; width: auto">
+                </a>
+            </nav>
+        </div>
+    </footer>
+  </div>
+    </div>
+    <div class="col-lg-4 hidden-md hidden-xs">
+
+    </div>
+
+</div>
+</body>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from apps.inventory.models import Movement, Location, State, Group, Item
 from apps.inventory.forms import GroupForm, StateForm, LocationForm, ItemForm, MovementForm
 from django.db.models import Sum
+from apps.user.views import Admin
 
 
 # Create your views here.
@@ -9,6 +10,7 @@ from django.db.models import Sum
 def index(request):
     model_item = Item.objects.all()
     data = {}
+    data['admin'] = Admin(request)
     data['inventory'] = 'active'
     data['title'] = 'Inventario'
     data['data'] = {}
@@ -30,6 +32,7 @@ def index(request):
 
 def Movement_maint(request, value, code):
     data = {}
+    data['admin'] = Admin(request)
     data['title'] = 'Inventario'
     data['inventory'] = 'active'
     if value == 'create':
@@ -61,6 +64,7 @@ def Movement_maint(request, value, code):
 
 def Create_value(request, value):
     data = {}
+    data['admin'] = Admin(request)
     data['title'] = 'Inventario'
     data['group'] = {'model': Group.objects.all().order_by('title'), 'form': GroupForm, 'title': 'Grupo', 'inventory': 'active'}
     data['state'] = {'model': State.objects.all(), 'form': StateForm, 'title': 'Estado', 'inventory': 'active'}
@@ -81,6 +85,7 @@ def Maintainer_item(request, value, code):
         'group': Group.objects.all(),
         'option': 'Mantenedor de items'
     }
+    data['admin'] = Admin(request)
     data['inventory'] = 'active'
     data['title'] = 'Inventario'
     if value == 'create':
@@ -114,6 +119,7 @@ def Movement_detail(request, code):
         'obj' : id_,
         'model': Movement.objects.filter(code=id_.id).order_by("-id")
     }
+    data['admin'] = Admin(request)
     data['inventory'] = 'active'
     data['title'] = 'Inventario'
     return render(request, 'inventory/movement_detail.html', data)

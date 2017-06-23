@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from apps.binnacle.models import Area, Accident, Workstation, Working, Type_Accident
 from apps.binnacle.forms import WorkingForm, WorkstationForm,  AreaForm, AccidentForm, Type_AccidentForm
 from django.db.models import Count
+from apps.user.views import Admin
 import os
 
 # Create your views here.
 
 def index(request):
     data = {}
+    data['admin'] = Admin(request)
     data['binnacle'] = 'active'
     data['model'] = Accident.objects.all().order_by('-id')[:5]
     data['accidentados'] = data['model'].aggregate(Count('id'))
@@ -21,12 +23,14 @@ def index(request):
 
 def All_accident(request):
     data = {}
+    data['admin'] = Admin(request)
     data['binnacle'] = 'active'
     data['model'] = Accident.objects.all().order_by('-id')
     return render(request, 'binnacle/all_accident.html', data)
 
 def Create_value(request, value, funct, id):
     data = { 'binnacle': 'active'}
+    data['admin'] = Admin(request)
     data['value'] = value
     id_int = int(id)
     if value == 'workstation':
@@ -87,6 +91,7 @@ def Create_value(request, value, funct, id):
 
 def Create_working(request, value):
     data = {'binnacle': 'active'}
+    data['admin'] = Admin(request)
     data['model'] = Working.objects.all().order_by('name')
     value_int = int(value)
     if value_int == 0:
@@ -103,6 +108,7 @@ def Create_working(request, value):
 
 def Create_accident(request,funct, value):
     data = {'binnacle': 'active'}
+    data['admin'] = Admin(request)
     data['model'] = Accident.objects.all()
     value_int = int(value)
     data['area'] = Area.objects.all().order_by('title')
@@ -162,5 +168,5 @@ def Send(id):
     for llo in email:
         print(llo)
         Notify('Se a registrado un nuevo accidente',
-               'Se a ingresado un nuevo accidente, haga clic aqui para ver detalles. '+dominio+'binnacle/accident/view/'+id,
+               'Se a ingresado un nuevo accidente, haga clic en el siguiente enlace para ver detalles. '+dominio+'binnacle/accident/view/'+id,
                llo)

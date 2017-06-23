@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="panel panel-default">
+		<div class="panel-heading" align="center">
+			<h3>
+			Por favor, complete el siguiente formulario para crear un nuevo usuario.
+		</h3>
+		</div>
+		<div class="panel-body" class="form-control">
+			<form method="POST">
+						{% csrf_token %}
+				<div class="row">
+	    			<div class="col-lg-6">
+					
+						<h4>¿Desea eliminar el usuario {{ object.username  }}?</h4>
+
+					</div>
+
+
+	    			<div class="col-lg-6"> 
+						<div class="row" align="center">
+		    				<div class="col-lg-6"> 
+								<button class="btn btn-danger" type="submit"> Si, eliminar </button> 
+							</div>
+							<div class="col-lg-6"> 
+								<a class="btn btn-default" href="{% url 'usuario:usuario_list' %}"> Cancelar </a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+</div>
+{% endblock %}

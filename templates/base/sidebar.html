@@ -24,4 +24,12 @@
             <p>Pantalla</p>
         </a>
     </li>
+     {% if admin %}
+    <li class="{{ adminuser }}">
+        <a href="{% url 'user:list' %}">
+            <i class="material-icons">users</i>
+            <p>Admin. de usuarios</p>
+        </a>
+    </li>
+     {% endif  %}
 </ul>

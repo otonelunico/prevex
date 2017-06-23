@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Registar usuario {% endblock %}
+{% block content %}
+
+<div class="container-fluid" align="center">
+    <h3>
+         Por favor, complete el siguiente formulario para crear un nuevo usuario.
+    </h3>
+    <div class="">
+        <form action="#" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-6">
+                    {% if user_ %}
+                    <input class="form-control" type="text" name="username" disabled value="{{ user_.username }}" id="id_username" placeholder="Introducir nombre de usuario" required>
+                    {% else %}
+                    <input class="form-control" type="text" name="username" value="{{ user_.username }}" id="id_username" placeholder="Introducir nombre de usuario" required>
+                    {% endif %}
+                    <input class="form-control" type="text" name="first_name" value="{{ user_.first_name }}" id="id_first_name" placeholder="Introducir nombre" required>
+                    <input class="form-control" type="text" name="last_name" value="{{ user_.last_name }}" id="id_last_name" placeholder="Introducir apellido" required>
+                    <input class="form-control" type="email" name="email" value="{{ user_.email }}" id="id_email" placeholder="Introducir correo electronico" required>
+                </div>
+                <div class="col-lg-6">
+                    <h4>Ingresar contraseña</h4>
+
+                    <input class="form-control" type="password" name="password1" id="id_password1" placeholder="Contraseña" required>
+                    <input class="form-control" type="password" name="password2" id="id_password2"  placeholder="Repetir contraseña" required>
+                </div>
+            </div>
+            <div class="row">
+                <div align="right">
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                    <button type="reset" class="btn btn-default">Borrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

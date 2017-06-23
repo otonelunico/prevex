@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+{% block title %} Usuarios registrados{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12" align="center">
+            <h3>Administrador de usuarios</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+             <div class="card">
+                <div class="card-header" data-background-color="orange">
+                    <div class="row " align="center" style="font-size: x-large;">
+                        <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Usuario</div></a>
+                        <a href=""> <div class="col-md-2 col-sm-2 fix-tabla">Nombre</div></a>
+                        <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Apellido</div></a>
+                        <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Email</div></a>
+                        <a href=""><div class="col-md-2 col-sm-2 fix-tabla">Tipo</div></a>
+                        <div class="col-md-2 col-sm-2">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="material-icons" style="font-size: xx-large" >add_circle</i>
+                            <div class="ripple-container"></div></a>
+                            <ul class="dropdown-menu" data-background-color="orange">
+                                <li><a href="{% url 'user:register' %}">Añadir usuario</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                 <div class="card-content">
+                 </div>
+                      {% for user,value in users.items %}
+
+                            {% if value.is_active %}
+                            <div class="row card-footer hidden-md" align="center">
+
+                                <div class="col-md-2 col-sm-2 " >{{ user }}</div>
+                                <div class="col-md-2 col-sm-2 ">{{ value.first_name }}</div>
+                                <div class="col-md-2 col-sm-2 " >{{ value.last_name }}</div>
+                                <div class="col-md-2 col-sm-2 " >{{ value.email }}</div>
+                                <div class="col-md-2 col-sm-2 " >{{ value.group }}</div>
+
+                                <div class="col-md-2 col-sm-2">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="material-icons color-orange">arrow_drop_down_circle</i>
+                                    <div class="ripple-container"></div></a>
+                                    <ul class="dropdown-menu" data-background-color="orange">
+                                        <li><a href="{% url 'user:edit' value.id %}">Editar</a></li>
+                                        <li><a href="{% url 'user:edit_type' value.id value.group %}">Cambiar tipo</a></li>
+                                        <li><a href="{% url 'user:deactivate' value.id %}">Desactivar</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="row card-footer hidden-md" align="center" style="color: #838985">
+
+                                <div class="col-md-2 col-sm-2 " >{{ user }}</div>
+                                <div class="col-md-2 col-sm-2 ">{{ value.first_name }}</div>
+                                <div class="col-md-2 col-sm-2 " >{{ value.last_name }}</div>
+                                <div class="col-md-2 col-sm-2 " >{{ value.email }}</div>
+                                <div class="col-md-2 col-sm-2 " >Desactivado</div>
+
+                                <div class="col-md-2 col-sm-2">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="material-icons color-orange">arrow_drop_down_circle</i>
+                                    <div class="ripple-container"></div></a>
+                                    <ul class="dropdown-menu" data-background-color="orange">
+                                        <li><a href="{% url 'user:edit' value.id %}">Editar</a></li>
+                                        <li><a href="{% url 'user:activate' value.id %}">Activar</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                          {% endif %}
+                         {% endfor %}
+             </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

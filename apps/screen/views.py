@@ -4,11 +4,13 @@ from apps.screen.models import Prevent, Video
 from apps.screen.forms import PreventForm, VideoForm
 from django.db.models import Count
 import time
+from apps.user.views import Admin
 # Create your views here.
 
 
 def index(request):
     data = {}
+    data['admin'] = Admin(request)
     data['screencast'] = 'active'
     current = Current()
     id_=current['id']
@@ -102,6 +104,7 @@ def Current_mes():
 
 def Settings(request):
     data = {}
+    data['admin'] = Admin(request)
     data['screen'] = 'active'
     data['title'] = 'Configurar pantalla'
     data['option'] = 'Configurar pantalla'
@@ -111,6 +114,7 @@ def Settings(request):
 
 def Prevent_(request, funct, type, id):
     data = {}
+    data['admin'] = Admin(request)
     data['screen'] = 'active'
     id_int = int(id)
     data['model'] = Prevent.objects.filter(type=type)
@@ -141,6 +145,7 @@ def Prevent_(request, funct, type, id):
 
 def Video_(request,funct, type):
     data = {}
+    data['admin'] = Admin(request)
     data['screen'] = 'active'
     data['type'] = type
     data['title']= Type_Accident.objects.get(id=type).title
