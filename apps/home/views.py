@@ -13,7 +13,7 @@ def index(request):
     data['home'] = 'active'
     data['cant']={
         'accident': Accident.objects.all().count(),
-        'users' : User.objects.all().count(),
+        'users' : User.objects.filter(is_superuser=False).count(),
         'inventory': Item.objects.all().count(),
         'type_accident' : Type_Accident.objects.all().count()
     }
