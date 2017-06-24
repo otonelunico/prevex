@@ -47,59 +47,60 @@ def Create_value(request, value, funct, id):
     data['admin'] = Admin(request)
     data['value'] = value
     id_int = int(id)
+    form = {}
     if value == 'workstation':
         data['model'] = Workstation.objects.all().order_by('title')
         data['title'] = 'puesto de trabajo'
         if funct == 'create':
-            data['form'] = WorkstationForm(request.POST)
+            form = WorkstationForm(request.POST)
             if request.method == 'POST':
-                if data['form'].is_valid():
-                    data['form'].save()
+                if form.is_valid():
+                    form.save()
         elif funct == 'edit':
             data['edit'] = Workstation.objects.get(id=id_int)
             if request.method == "GET":
                 data['form'] = WorkstationForm(instance=data['edit'])
                 print(data['form'])
             else:
-                data['form'] = WorkstationForm(request.POST, instance=data['edit'])
-                if data['form'].is_valid():
-                    data['form'].save()
+                form = WorkstationForm(request.POST, instance=data['edit'])
+                if form.is_valid():
+                    form.save()
                 return redirect('binnacle:create_value', value, 'create', '0')
     elif value == 'area':
         data['model'] = Area.objects.all().order_by('title')
         data['title'] = 'area de trabajo'
         if funct == 'create':
-            data['form'] = AreaForm(request.POST)
+            form = AreaForm(request.POST)
             if request.method == 'POST':
-                if data['form'].is_valid():
-                    data['form'].save()
+                if form.is_valid():
+                    form.save()
         elif funct == 'edit':
             data['edit'] = Area.objects.get(id=id_int)
             if request.method == "GET":
                 data['form'] = AreaForm(instance=data['edit'])
                 print(data['form'])
             else:
-                data['form'] = AreaForm(request.POST, instance=data['edit'])
-                if data['form'].is_valid():
-                    data['form'].save()
+                form = AreaForm(request.POST, instance=data['edit'])
+                if form.is_valid():
+                    form.save()
                 return redirect('binnacle:create_value', value, 'create', '0')
     elif value == 'type':
         data['model'] = Type_Accident.objects.all().order_by('title')
         data['title'] = 'tipo de accidente'
         if funct == 'create':
-            data['form'] = Type_AccidentForm(request.POST)
+            form = Type_AccidentForm(request.POST)
             if request.method == 'POST':
-                if data['form'].is_valid():
-                    data['form'].save()
+                if form.is_valid():
+                    form.save()
         elif funct == 'edit':
             data['edit'] = Type_Accident.objects.get(id=id_int)
             if request.method == "GET":
-                data['form'] = Type_AccidentForm(instance=data['edit'])
-                print(data['form'])
+                form = Type_AccidentForm(instance=data['edit'])
+
             else:
-                data['form'] = Type_AccidentForm(request.POST, instance=data['edit'])
-                if data['form'].is_valid():
-                    data['form'].save()
+                form = Type_AccidentForm(request.POST, instance=data['edit'])
+                if form.is_valid():
+                    form.save()
                 return redirect('binnacle:create_value', value, 'create', '0')
     return render(request, 'binnacle/create_value.html', data)
 
