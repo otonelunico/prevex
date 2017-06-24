@@ -12,7 +12,7 @@ def Registeruser(request):
     data['admin']= Admin(request)
     data['form'] = AuthForm
     data['groups'] = Group.objects.all().order_by('-id')
-    print()
+
     if request.method == 'POST':
         form = AuthForm(request.POST)
         if form.is_valid():
@@ -22,8 +22,12 @@ def Registeruser(request):
             user_.groups.add(group)
             return redirect('user:list')
         else:
-            print(form.is_valid())
+            print(form.error_messages)
             print(form.errors)
+            data['error']={
+                'error': form.errors
+            }
+
     return render(request, 'auth/user_form.html', data)
 
 def Admin(request):
