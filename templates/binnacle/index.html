@@ -13,9 +13,9 @@
                     <h3 class="title">{{ accidentados }}<small> accidentes regist.</small></h3>
                 </div>
                 <div class="card-footer">
-                    <a href="{% url 'binnacle:all_accident' %}"><div class="stats" style="font-size: large">
-                        <i class="material-icons" style="padding-bottom: 10px">list</i> Ver todos el registro
-                  </div></a>
+                    <div class="stats">
+                        <i class="material-icons ">list</i> <a href="{% url 'binnacle:all_accident' %}" style="color: #727272"> Ver todos los registros.</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,21 +29,19 @@
                     <h3 class="title">{{ repose }}<small> en descanso </small></h3>
                 </div>
                 <div class="card-footer">
-                    <a href="">
-                        <div class="stats" style="font-size: large">
-                        <i class="material-icons" style="padding-bottom: 10px">add_circle</i> Añadir un registro de accidente
-                  </div></a>
+                    <div class="stats">
+                        <i class="material-icons ">list</i> <a href="{% url 'binnacle:all_repose' %}" style="color: #727272"> Ver todos los registros.</a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="card card-stats">
                 <div class="card-header" data-background-color="red">
-                    <i class="material-icons">mood_bad</i>
+                    <i class="material-icons">view_comfy</i>
                 </div>
-                <div class="card-content">
-                    <h4 class="title"> <small> Ver el registro </small> </h4>
-                    <h3 class="title"><small>completo</small></h3>
+                <div class="card-content" style="padding-bottom: 26px">
+                    <h2 class="title"> <small> Ver otros listado </small> </h2>
                 </div>
                 <div class="card-footer">
                     <a href="#" class="status" data-toggle="dropdown" aria-expanded="false">
@@ -96,16 +94,7 @@
                                     <div class="col-md-2 col-sm-2 " >{{ datas.workstation}}</div></a>
                                     <div class="col-md-1 col-sm-1">
                                         <a href="{% url 'binnacle:accident' 'edit' datas.id %}" rel="tooltip" data-original-title="Editar" title=""><i class="material-icons">mode_edit</i></a>
-                                        <a href="#" rel="tooltip" data-original-title="Añadir reposo?" title="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="material-icons">hotel</i>
-                                            <div class="ripple-container">
-                                            </div>
-                                        </a>
-                                        <div class="ripple-container"></div>
-                                        <ul class="dropdown-menu" data-background-color="red">
-                                            <li><p style="text-align: center;font-size: large">Reposo</p></li>
-                                            <li><a href="">Seguro?</a></li>
-                                        </ul>
+
                                     </div>
                                 </div>
                              {% endfor %}

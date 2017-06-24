@@ -2,154 +2,154 @@
 {% block title %} Inicio {% endblock title %}
 {% block content %}
 <div class="container-fluid">
-					<div class="row">
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header" data-background-color="orange">
-									<i class="material-icons">content_copy</i>
-								</div>
-								<div class="card-content">
-									<p class="category">Used Space</p>
-									<h3 class="title">49/50<small>GB</small></h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons text-danger">warning</i> <a href="#pablo">Get More Space...</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header" data-background-color="green">
-									<i class="material-icons">store</i>
-								</div>
-								<div class="card-content">
-									<p class="category">Revenue</p>
-									<h3 class="title">$34,245</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">date_range</i> Last 24 Hours
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header" data-background-color="red">
-									<i class="material-icons">info_outline</i>
-								</div>
-								<div class="card-content">
-									<p class="category">Fixed Issues</p>
-									<h3 class="title">75</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">local_offer</i> Tracked from Github
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header" data-background-color="blue">
-									<i class="fa fa-twitter"></i>
-								</div>
-								<div class="card-content">
-									<p class="category">Followers</p>
-									<h3 class="title">+245</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">update</i> Just Updated
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-4">
-							<div class="card">
-								<div class="card-header card-chart" data-background-color="green">
-									<div class="ct-chart" id="dailySalesChart"></div>
-								</div>
-								<div class="card-content">
-									<h4 class="title">Daily Sales</h4>
-									<p class="category"><span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%  </span> increase in today sales.</p>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">access_time</i> updated 4 minutes ago
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-4">
-							<div class="card">
-								<div class="card-header card-chart" data-background-color="orange">
-									<div class="ct-chart" id="emailsSubscriptionChart"></div>
-								</div>
-								<div class="card-content">
-									<h4 class="title">Email Subscriptions</h4>
-									<p class="category">Last Campaign Performance</p>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">access_time</i> campaign sent 2 days ago
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-						<div class="col-md-4">
-							<div class="card">
-								<div class="card-header card-chart" data-background-color="red">
-									<div class="ct-chart" id="completedTasksChart"></div>
-								</div>
-								<div class="card-content">
-									<h4 class="title">Completed Tasks</h4>
-									<p class="category">Last Campaign Performance</p>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">access_time</i> campaign sent 2 days ago
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+{% if admin %}
+   <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                    <i class="material-icons">content_copy</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Actual hay </p>
+                    <h4 class="title">{{ cant.inventory }} <small style="font-size: small">Item regist</small></h4>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons ">list</i> <a href="{% url 'inventory:index' %}" style="color: #727272"> Ver todos los registros.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">info_outline</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Actual hay </p>
+                    <h4 class="title">{{ cant.accident }} <small style="font-size: small">Accid regis.</small></h4>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons ">list</i> <a href="{% url 'binnacle:all_accident' %}" style="color: #727272"> Ver todos los registros.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="material-icons">done_all</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Actual hay </p>
+                    <h4 class="title">{{ cant.type_accident }} <small style="font-size: small">Tipos accid</small></h4>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons ">list</i> <a href="{% url 'screen:settings' %}" style="color: #727272"> Ver todos los registros.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <i class="material-icons">group</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Actual hay </p>
+                    <h4 class="title">{{ cant.users }} <small style="font-size: small">Usuar. reg.</small></h4>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons ">list</i> <a href="{% url 'user:list' %}" style="color: #727272"> Ver todos los registros.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                    <i class="material-icons">content_copy</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Actualmente hay </p>
+                    <h3 class="title">{{ cant.inventory }} <small style="font-size: small">Items registrados</small></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons ">list</i> <a href="{% url 'inventory:index' %}" style="color: #727272"> Ver todos los registros.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">store</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Actualmente hay </p>
+                    <h3 class="title">{{ cant.accident }} <small style="font-size: small">Accidentes regis.</small></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons ">list</i> <a href="{% url 'binnacle:all_accident' %}" style="color: #727272"> Ver todos los registros.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="material-icons">info_outline</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Actualmente hay </p>
+                    <h3 class="title">{{ cant.type_accident }} <small style="font-size: small">Tipos de accidentes</small></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons ">list</i> <a href="{% url 'screen:settings' %}" style="color: #727272"> Ver todos los registros.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
 
 					<div class="row">
-						<div class="col-lg-6 col-md-12">
+						<div class="col-lg-9 col-md-12">
 							<div class="card card-nav-tabs">
 								<div class="card-header" data-background-color="purple">
 									<div class="nav-tabs-navigation">
 										<div class="nav-tabs-wrapper">
-											<span class="nav-tabs-title">Tasks:</span>
+											<span class="nav-tabs-title">Ultimos registros:</span>
 											<ul class="nav nav-tabs" data-tabs="tabs">
 												<li class="active">
-													<a href="#profile" data-toggle="tab">
-														<i class="material-icons">bug_report</i>
-														Bugs
+													<a href="#inventory" data-toggle="tab">
+														<i class="material-icons">format_list_numbered</i>
+														Inventario
 													<div class="ripple-container"></div></a>
 												</li>
 												<li class="">
-													<a href="#messages" data-toggle="tab">
-														<i class="material-icons">code</i>
-														Website
+													<a href="#binnacle" data-toggle="tab">
+														<i class="material-icons">import_contacts</i>
+                                                        Bitacora
 													<div class="ripple-container"></div></a>
 												</li>
+                                                {% if admin %}
 												<li class="">
-													<a href="#settings" data-toggle="tab">
-														<i class="material-icons">cloud</i>
-														Server
+													<a href="#user" data-toggle="tab">
+														<i class="material-icons">group</i>
+                                                        Usuarios
 													<div class="ripple-container"></div></a>
 												</li>
+                                                {% endif %}
 											</ul>
 										</div>
 									</div>
@@ -157,186 +157,80 @@
 
 								<div class="card-content">
 									<div class="tab-content">
-										<div class="tab-pane active" id="profile">
+										<div class="tab-pane active" id="inventory">
 											<table class="table">
 												<tbody>
-													<tr>
+                                                {% for movimiento in inventory %}
+                                                    <tr>
 														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes" checked>
-																</label>
+															<div style="width: 20px; padding-top: 3px">
+                                                                <i class="material-icons">label</i>
 															</div>
 														</td>
-														<td>Sign contract for "What are conference organizers afraid of?"</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
+														<td class="text-center" style="width: 160px">{{ movimiento.created_at }}</td>
+														<td class="text-left" style="width: 100px">{{ movimiento.code }}</td>
+														<td class="text-left" style="width: 370px">{{ movimiento.code.description }}</td>
+														<td class="text-left" style="width: 20px">{{ movimiento.stock }}</td>
+														<td class="td-actions text-center">
+                                                            <a href="{% url 'inventory:movement_detail' movimiento.code %}">
+                                                                <button type="button" rel="tooltip" title="Ver detalles" class="btn btn-primary btn-simple btn-xs">
+                                                                    <i class="material-icons">edit</i> Ver
+                                                                </button>
+                                                            </a>
 													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
-															</div>
-														</td>
-														<td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
-															</div>
-														</td>
-														<td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-														</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes" checked>
-																</label>
-															</div>
-														</td>
-														<td>Create 4 Invisible User Experiences you Never Knew About</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
+                                                {% endfor %}
+
+
 												</tbody>
 											</table>
 										</div>
-										<div class="tab-pane" id="messages">
+										<div class="tab-pane" id="binnacle">
 											<table class="table">
 												<tbody>
-													<tr>
+                                                {% for movimiento in binnacle %}
+                                                    <tr>
 														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes" checked>
-																</label>
+															<div style="width: 20px; padding-top: 3px">
+                                                                <i class="material-icons">label</i>
 															</div>
 														</td>
-														<td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-														</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
+														<td class="text-center" style="width: 160px">{{ movimiento.date }}   a las {{ movimiento.hour }}</td>
+														<td class="text-left" style="width: 470px">{{ movimiento.type }} en {{ movimiento.workstation }} de {{ movimiento.area }} sufrido por {{ movimiento.working.name }}</td>
+														<td class="td-actions text-center">
+                                                            <a href="{% url 'binnacle:accident' 'view' movimiento.id %}">
+                                                                <button type="button" rel="tooltip" title="Ver detalles" class="btn btn-primary btn-simple btn-xs">
+                                                                    <i class="material-icons">edit</i> Ver
+                                                                </button>
+                                                            </a>
 													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
-															</div>
-														</td>
-														<td>Sign contract for "What are conference organizers afraid of?"</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
+                                                {% endfor %}
+
+
 												</tbody>
 											</table>
 										</div>
-										<div class="tab-pane" id="settings">
+										<div class="tab-pane" id="user">
 											<table class="table">
 												<tbody>
-													<tr>
+                                                {% for movimiento in user_ %}
+                                                    <tr>
 														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
+															<div style="width: 20px; padding-top: 3px">
+                                                                <i class="material-icons">label</i>
 															</div>
 														</td>
-														<td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
+														<td class="text-center" style="width: 160px">{{ movimiento.date_joined }}</td>
+														<td class="text-left" style="width: 470px">Usuario: {{ movimiento }} - Nombre: {{ movimiento.first_name }} {{ movimiento.last_name }} - Email: {{ movimiento.email }}</td>
+														<td class="td-actions text-center">
+                                                            <a href="{% url 'user:list' %}">
+                                                                <button type="button" rel="tooltip" title="Ver detalles" class="btn btn-primary btn-simple btn-xs">
+                                                                    <i class="material-icons">edit</i> Ver
+                                                                </button>
+                                                            </a>
 													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes" checked>
-																</label>
-															</div>
-														</td>
-														<td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-														</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
-															</div>
-														</td>
-														<td>Sign contract for "What are conference organizers afraid of?"</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
+                                                {% endfor %}
+
+
 												</tbody>
 											</table>
 										</div>
@@ -345,50 +239,24 @@
 							</div>
 						</div>
 
-						<div class="col-lg-6 col-md-12">
+						<div class="col-lg-3 col-md-12">
 							<div class="card">
-	                            <div class="card-header" data-background-color="orange">
-	                                <h4 class="title">Employees Stats</h4>
-	                                <p class="category">New employees on 15th September, 2016</p>
+	                            <div class="card-header" data-background-color="red">
+	                                <h3 class="title">Sin accidentes</h3>
 	                            </div>
-	                            <div class="card-content table-responsive">
-	                                <table class="table table-hover">
-	                                    <thead class="text-warning">
-	                                        <th>ID</th>
-	                                    	<th>Name</th>
-	                                    	<th>Salary</th>
-	                                    	<th>Country</th>
-	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>1</td>
-	                                        	<td>Dakota Rice</td>
-	                                        	<td>$36,738</td>
-	                                        	<td>Niger</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>2</td>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>$23,789</td>
-	                                        	<td>Curaçao</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>3</td>
-	                                        	<td>Sage Rodriguez</td>
-	                                        	<td>$56,142</td>
-	                                        	<td>Netherlands</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>4</td>
-	                                        	<td>Philip Chaney</td>
-	                                        	<td>$38,735</td>
-	                                        	<td>Korea, South</td>
-	                                        </tr>
-	                                    </tbody>
-	                                </table>
+	                            <div class="card-content text-center">
+                                    <h1 style="font-size: 56pt"><b>{{ days.days }}</b></h1>
+                                    <h5>dias sin accidentes</h5>
 	                            </div>
+                                <div class="card-footer text-center">
+                                    <div class="stats">
+                                        <h4><i class="material-icons">date_range</i> ¿Ultimo accidente?</h4>
+                                        <h3><b>{{ last_accident.date }}</b></h3>
+                                    </div>
+                                </div>
 	                        </div>
 						</div>
 					</div>
+
 				</div>
 {% endblock content %}

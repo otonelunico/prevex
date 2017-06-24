@@ -7,7 +7,14 @@
     <link href="{% static 'css/material-icons.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet"></head>
 <body>
-<div class="row container-fluid" style="padding-top: 6%">
+<div class="row">
+    <div class="col-lg-11" style="margin: 1%" align="right">
+        <a href="{% url 'screen:index' %}">
+            Ver pantalla para prevenir <i class="material-icons">ondemand_video</i>
+        </a>
+    </div>
+</div>
+<div class="row container-fluid" style="padding-top: 3%">
     <div class="col-lg-4 hidden-md hidden-xs">
 
     </div>
@@ -45,8 +52,8 @@
 
 
     <footer class="footer">
-        <div class="container-fluid">
-            <nav class="pull-right">
+        <div class="container-fluid" align="center">
+            <nav class="">
                 Powered by
                 <a href="https://vicius2.herokuapp.com/"  target="_blank">
                     <img src="https://vicius2.herokuapp.com/static/img/vicius-black.png" alt="" title="" style="height: 20px; width: auto">

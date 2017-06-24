@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% block title %} Usuarios registrados{% endblock %}
 {% block content %}
+    {% if admin %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 col-md-12" align="center">
@@ -29,12 +30,29 @@
                 </div>
                  <div class="card-content">
                  </div>
-                      {% for user,value in users.items %}
 
-                            {% if value.is_active %}
+
+                      {% for user_,value in users.items %}
+                            {% if value.username == user.get_username %}
                             <div class="row card-footer hidden-md" align="center">
 
-                                <div class="col-md-2 col-sm-2 " >{{ user }}</div>
+                                <div class="col-md-2 col-sm-2 ">{{ value.username }}</div>
+                                <div class="col-md-2 col-sm-2 ">{{ value.first_name }}</div>
+                                <div class="col-md-2 col-sm-2 ">{{ value.last_name }}</div>
+                                <div class="col-md-2 col-sm-2 ">{{ value.email }}</div>
+                                <div class="col-md-2 col-sm-2 ">{{ value.group }}</div>
+
+                                <div class="col-md-2 col-sm-2">
+                                    <a href="#" class="dropdown-toggle color-orange" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="material-icons">cancel</i>
+                                    <div class="ripple-container"></div></a>
+
+                                </div>
+                            </div>
+                            {% elif value.is_active %}
+                            <div class="row card-footer hidden-md" align="center">
+
+                                <div class="col-md-2 col-sm-2 " >{{ value.username }}</div>
                                 <div class="col-md-2 col-sm-2 ">{{ value.first_name }}</div>
                                 <div class="col-md-2 col-sm-2 " >{{ value.last_name }}</div>
                                 <div class="col-md-2 col-sm-2 " >{{ value.email }}</div>
@@ -54,7 +72,7 @@
                             {% else %}
                             <div class="row card-footer hidden-md" align="center" style="color: #838985">
 
-                                <div class="col-md-2 col-sm-2 " >{{ user }}</div>
+                                <div class="col-md-2 col-sm-2 " >{{ value.username }}</div>
                                 <div class="col-md-2 col-sm-2 ">{{ value.first_name }}</div>
                                 <div class="col-md-2 col-sm-2 " >{{ value.last_name }}</div>
                                 <div class="col-md-2 col-sm-2 " >{{ value.email }}</div>
@@ -77,6 +95,6 @@
         </div>
     </div>
 </div>
-
+    {% endif %}
 
 {% endblock %}

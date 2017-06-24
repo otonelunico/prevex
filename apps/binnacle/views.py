@@ -3,6 +3,8 @@ from apps.binnacle.models import Area, Accident, Workstation, Working, Type_Acci
 from apps.binnacle.forms import WorkingForm, WorkstationForm,  AreaForm, AccidentForm, Type_AccidentForm
 from django.db.models import Count
 from apps.user.views import Admin
+from django.contrib.auth.models import User
+
 import os
 
 # Create your views here.
@@ -12,12 +14,12 @@ def index(request):
     data['admin'] = Admin(request)
     data['binnacle'] = 'active'
     data['model'] = Accident.objects.all().order_by('-id')[:5]
-    data['accidentados'] = data['model'].aggregate(Count('id'))
+    data['accidentados'] = Accident.objects.all().aggregate(Count('id'))
     data['accidentados'] = data['accidentados']['id__count']
     repose = 0
-    for item in data['model']:
-        if item.repose > 0:
-            repose = repose + 1
+    for item in Accident.objects.all():
+        if item.repose != 0:
+            repose =repose +1
     data['repose']=repose
     return render(request, 'binnacle/index.html', data)
 
@@ -26,6 +28,18 @@ def All_accident(request):
     data['admin'] = Admin(request)
     data['binnacle'] = 'active'
     data['model'] = Accident.objects.all().order_by('-id')
+    return render(request, 'binnacle/all_accident.html', data)
+
+def All_repose(request):
+    data = {}
+    data['admin'] = Admin(request)
+    data['binnacle'] = 'active'
+    data['model']={}
+    llo = Accident.objects.filter().order_by('-id')
+    for llos in llo:
+        if llos.repose != 0:
+            data['model'][llos]=llos
+
     return render(request, 'binnacle/all_accident.html', data)
 
 def Create_value(request, value, funct, id):
@@ -164,9 +178,9 @@ def Send(id):
     dominio = 'http://0.0.0.0:8888/'
     if os.getenv('SETTINGS_MODE') in ['PROD']:
         dominio = 'https://prevex.herokuapp.com/'
-    email = {'ocubillosj@gmail.com', 'ocubillos.corp@gmail.com'}
+    email = User.objects.all().order_by('id')
     for llo in email:
         print(llo)
         Notify('Se a registrado un nuevo accidente',
                'Se a ingresado un nuevo accidente, haga clic en el siguiente enlace para ver detalles. '+dominio+'binnacle/accident/view/'+id,
-               llo)
+               llo.email)

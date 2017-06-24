@@ -22,7 +22,7 @@
                 <input type="text" name="detail" id="id_detail" value="{{ edit.detail }}" required class="form-control" placeholder="Ingrese detalle del {{ title }}"/>
             </div>
             <div class="col-lg-2">
-                <button class="btn btn-primary btn-round btn-red" type='submit'>
+                <button class="btn btn-primary btn-round btn-red" type='submit' onClick="javascript:history.go(-1);">
                     {% if edit %}
                         Editar
                     {% else %}
